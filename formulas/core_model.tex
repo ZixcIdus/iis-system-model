@@ -1,0 +1,68 @@
+% IIS — Information and Measurement System
+% Core mathematical formulation (conceptual engineering model)
+
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+\section*{IIS Core Model}
+
+\subsection*{Inputs}
+Let the normalized input parameters be:
+\[
+A, \Gamma, H, V \in [0, 1]
+\]
+where:
+\begin{itemize}
+  \item $A$ --- activity-related parameter,
+  \item $\Gamma$ --- stress-related parameter,
+  \item $H$ --- stability parameter,
+  \item $V$ --- variability parameter.
+\end{itemize}
+
+\subsection*{Weights}
+Let the model weights be:
+\[
+w_A = 0.35,\quad w_\Gamma = 0.25,\quad w_H = 0.30,\quad w_V = 0.10
+\]
+with the normalization constraint:
+\[
+w_A + w_\Gamma + w_H + w_V = 1
+\]
+
+\subsection*{Linear aggregation}
+Define the raw aggregated value:
+\[
+\mathrm{IIS}_{raw} = w_A A + w_\Gamma \Gamma + w_H H + w_V V
+\]
+Explicitly:
+\[
+\mathrm{IIS}_{raw} = 0.35A + 0.25\Gamma + 0.30H + 0.10V
+\]
+
+\subsection*{Non-linear mapping (sigmoid)}
+Define the sigmoid function:
+\[
+\sigma(x) = \frac{1}{1 + e^{-x}}
+\]
+
+The IIS output index is:
+\[
+\mathrm{IIS} = \sigma(\mathrm{IIS}_{raw})
+\]
+
+\subsection*{Output range}
+Since $\sigma(x) \in (0, 1)$ for all real $x$, it follows that:
+\[
+\mathrm{IIS} \in (0, 1)
+\]
+
+\subsection*{Note}
+This model is an analytical aggregation framework.
+It does not define measurement methods and must be interpreted only
+within documented assumptions and limitations.
+
+\end{document}
